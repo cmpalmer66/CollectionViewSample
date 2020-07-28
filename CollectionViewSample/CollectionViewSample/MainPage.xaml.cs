@@ -19,6 +19,11 @@ namespace CollectionViewSample
             InitializeComponent();
             MyCollectionView.BindingContext = this;
             MyCollectionView.SetBinding(ItemsView.ItemsSourceProperty, nameof(ControlList));
+
+            for (var x = 0; x < 20; x++)
+            {
+                ControlList.Add(new Label {Text = $"Added at {ControlList.Count}"});
+            }
         }
 
         public ObservableCollection<View> ControlList { get; set; } = new ObservableCollection<View>();
