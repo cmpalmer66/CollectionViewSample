@@ -5,6 +5,22 @@ using Xamarin.Forms;
 
 namespace CollectionViewSample
 {
+    public class ViewTemplateSelector : DataTemplateSelector
+    {
+        public DataTemplate LabelTemplate { get; set; }
+        public DataTemplate EntryTemplate { get; set; }
+        protected override DataTemplate OnSelectTemplate(object item, BindableObject container)
+        {
+            return ((CollectionData)item).Type == 1 ? LabelTemplate : EntryTemplate;
+        }
+    }
+
+    public class CollectionData
+    {
+        public string Name { get; set; }
+        public int Type { get; set; }
+    }
+
     [DesignTimeVisible(false)]
     public partial class MainPage : ContentPage
     {
@@ -16,20 +32,20 @@ namespace CollectionViewSample
 
             for (var x = 0; x < 20; x++)
             {
-                ControlList.Add(new Label {Text = $"Added at {ControlList.Count}"});
+                ControlList.Add(new CollectionData {Name = $"Added at {ControlList.Count}", Type = 1});
             }
         }
 
-        public ObservableCollection<View> ControlList { get; set; } = new ObservableCollection<View>();
+        public ObservableCollection<CollectionData> ControlList { get; set; } = new ObservableCollection<CollectionData>();
 
         private void Button1_OnClicked(object sender, EventArgs e)
         {
-            ControlList.Add(new Label {Text = $"Added at {ControlList.Count}"});
+            ControlList.Add(new CollectionData {Name = $"Added at {ControlList.Count}", Type = 1});
         }
 
         private void Button2_OnClicked(object sender, EventArgs e)
         {
-            ControlList.Add(new Entry {Text = $"Added at {ControlList.Count}"});
+            ControlList.Add(new CollectionData {Name = $"Added at {ControlList.Count}", Type = 2});
         }
     }
 }

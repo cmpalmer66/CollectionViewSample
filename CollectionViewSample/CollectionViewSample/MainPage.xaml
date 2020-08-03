@@ -3,20 +3,43 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:collectionViewSample="clr-namespace:CollectionViewSample;assembly=CollectionViewSample"
              mc:Ignorable="d"
              x:Class="CollectionViewSample.MainPage">
 
-    <StackLayout>
-        <Button Text="Add Label" Clicked="Button1_OnClicked" />
-        <Button Text="Add Entry" Clicked="Button2_OnClicked" />
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Key="labelTemplate">
+                <StackLayout>
+                    <Label Text="This is the title text" FontSize="Large" />
+                    <Label Text="{Binding Name}" />
+                </StackLayout>
+            </DataTemplate>
+            <DataTemplate x:Key="entryTemplate">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0" Text="Now is the time for all good men to come to the aid of their quick brown foxes jumping over lazy dogs"></Label>
+                    <Entry Grid.Row="1" Text="{Binding Name}" />
+                    <Label Grid.Row="2" Text="Howdy" TextColor="Red"></Label>
+                </Grid>
 
-        <CollectionView x:Name="MyCollectionView">
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <ContentView Content="{Binding .}"></ContentView>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-    </StackLayout>
+            </DataTemplate>
+            <collectionViewSample:ViewTemplateSelector x:Key="ViewTemplateSelector"
+                                  LabelTemplate="{StaticResource labelTemplate}"
+                                  EntryTemplate="{StaticResource entryTemplate}" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
+    <ContentPage.Content>
+        <StackLayout>
+            <Button Text="Add Label" Clicked="Button1_OnClicked" />
+            <Button Text="Add Entry" Clicked="Button2_OnClicked" />
+
+            <CollectionView x:Name="MyCollectionView" ItemSizingStrategy="MeasureAllItems" ItemsUpdatingScrollMode="KeepLastItemInView" ItemTemplate="{StaticResource ViewTemplateSelector}" />
+        </StackLayout>
+    </ContentPage.Content>
 </ContentPage>
