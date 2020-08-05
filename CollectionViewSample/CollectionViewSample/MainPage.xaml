@@ -10,7 +10,7 @@
         <Button Text="Add Label" Clicked="Button1_OnClicked" />
         <Button Text="Add Entry" Clicked="Button2_OnClicked" />
 
-        <CollectionView x:Name="MyCollectionView">
+        <CollectionView x:Name="MyCollectionView" Scrolled="MyCollectionView_OnScrolled">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <ContentView Content="{Binding .}"></ContentView>

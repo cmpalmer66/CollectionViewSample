@@ -31,5 +31,10 @@ namespace CollectionViewSample
         {
             ControlList.Add(new Entry {Text = $"Added at {ControlList.Count}"});
         }
+
+        private void MyCollectionView_OnScrolled(object sender, ItemsViewScrolledEventArgs e)
+        {
+            Console.WriteLine($"Scrolled: {e.FirstVisibleItemIndex}");
+        }
     }
 }
