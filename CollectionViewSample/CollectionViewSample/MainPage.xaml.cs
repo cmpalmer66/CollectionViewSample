@@ -45,7 +45,8 @@ namespace CollectionViewSample
 
         private void Button2_OnClicked(object sender, EventArgs e)
         {
-            ControlList.Add(new CollectionData {Name = $"Added at {ControlList.Count}", Type = 2});
+            ControlList.RemoveAt(2);
+            // ControlList.Add(new CollectionData {Name = $"Added at {ControlList.Count}", Type = 2});
         }
     }
 }

@@ -37,7 +37,7 @@
     <ContentPage.Content>
         <StackLayout>
             <Button Text="Add Label" Clicked="Button1_OnClicked" />
-            <Button Text="Add Entry" Clicked="Button2_OnClicked" />
+            <Button Text="Remove Label" Clicked="Button2_OnClicked" />
 
             <CollectionView x:Name="MyCollectionView" ItemSizingStrategy="MeasureAllItems" ItemsUpdatingScrollMode="KeepLastItemInView" ItemTemplate="{StaticResource ViewTemplateSelector}" />
         </StackLayout>
